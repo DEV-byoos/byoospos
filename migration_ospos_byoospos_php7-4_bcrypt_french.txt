@@ -1,0 +1,48 @@
+Autheur   Gabriel BOBARD  gbobard@gmail.com    http://byoosdigital.com  for the community nodcms    version du 2020/03/01
+The main objective of this work:
+migration OSPOS 3.3.1 to ByoosPOS_v3-3-1a on php 7.4 to codeIgniter 3.1.11 password strategy BCRYPT - tanslate French Language
+
+ORGANISATION
+BYOOS solutions Cameroun  http://byoosdigital.com
+download on github   https://github.com/opensourcepos/opensourcepos.git
+explore   https://github.com/opensourcepos
+
+Installation of OSPOS Current version is 3.3.1 and is developed by OSPOS Group.
+
+CONFIGURATION
+PHP version: 7.4
+database server version : 10.3.21-MariaDB-1:10.3.21+maria~stretch-log - mariadb.org binary distribution 
+
+********** START debug *************
+/root/application/hook/load_config.php
+Deprecated: Array and string offset access syntax with curly braces is deprecated 
+in /root/application/views/barcodes/Ean8.php on line 126
+replace {  to [  since php 7.4
+line 115
+line 126
+line 146
+line 167
+line 175
+
+
+/root/application/hook/load_config.php		
+    // fallback to English if language settings are not correct
+    $file_exists = !file_exists(APPPATH.'language/' . current_language_code());
+    if(current_language_code() == null || current_language() == null || $file_exists)
+    {
+        $CI->config->set_item('language', 'english');
+        $CI->config->set_item('language_code', 'en-US');
+    }
+
+    _load_language_files($CI, BASEPATH.'language', current_language());
+    _load_language_files($CI, APPPATH.'language', current_language_code());
+		
+/root/vendor/codeigniter/framework/system    
+moving  to  	/root/vendor/framework/codeigniter/system
+moving /root/public/index.php        to /root/index.php
+ 
+IN  /root/index.php
+system = 'vendor/framework/codeigniter/system'   
+	
+
+********** END debug *************
